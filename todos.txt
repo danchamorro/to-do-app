@@ -1,0 +1,6 @@
+X play
+sleep
+run
+jump
+run
+play
