@@ -1,27 +1,49 @@
 def main():
-    to_do_list = []
     while True:
         user_action = input("Type add, show, edit, complete, delete or quit: ").strip()
         match user_action:
             case "add":
-                to_do_list.append(input("What do you want to add? ").strip())
+                todo = input("What do you want to add? ").strip()
+                with open("todos.txt", "a") as f:
+                    f.write(f"{todo}\n")
             case "show":
-                for index, item in enumerate(to_do_list):
-                    print(f"{index}. {item}")
+                with open("todos.txt", "r") as f:
+                    todos = f.readlines()
+                for i, todo in enumerate(todos):
+                    print(f"{i + 1}: {todo.strip()}")
+            case "edit":
+                with open("todos.txt", "r") as f:
+                    todos = f.readlines()
+                for i, todo in enumerate(todos):
+                    print(f"{i + 1}: {todo.strip()}")
+                todo_index = int(input("Which todo do you want to edit? "))
+                new_todo = input("What do you want to change it to? ").strip()
+                todos[todo_index - 1] = f"{new_todo}\n"
+                with open("todos.txt", "w") as f:
+                    f.writelines(todos)
+            case "complete":
+                with open("todos.txt", "r") as f:
+                    todos = f.readlines()
+                for i, todo in enumerate(todos):
+                    print(f"{i + 1}: {todo.strip()}")
+                todo_index = int(input("Which todo do you want to complete? "))
+                todos[todo_index - 1] = f"X {todos[todo_index - 1]}"
+                with open("todos.txt", "w") as f:
+                    f.writelines(todos)
+            case "delete":
+                with open("todos.txt", "r") as f:
+                    todos = f.readlines()
+                for i, todo in enumerate(todos):
+                    print(f"{i + 1}: {todo.strip()}")
+                todo_index = int(input("Which todo do you want to delete? "))
+                del todos[todo_index - 1]
+                with open("todos.txt", "w") as f:
+                    f.writelines(todos)
             case "quit":
                 break
-            case "edit":
-                index = int(input("Which index do you want to edit? "))
-                to_do_list[index] = input("What do you want to change it to? ")
-            case "complete":
-                index = int(input("Which index do you want to complete? "))
-                to_do_list[index] = f"✅ {to_do_list[index]}"
-            case 'delete':
-                index = int(input("Which index do you want to delete? "))
-                to_do_list.pop(index)
             case _:
                 print("Invalid action")
-
+                
 
 if __name__ == "__main__":
     main()
