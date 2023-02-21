@@ -1,10 +1,12 @@
 def add_todo():
+    """Add a todos to the todos.txt file."""
     todo = input("What do you want to add? ").strip()
     with open("todos.txt", "a") as f:
         f.write(f"{todo}\n")
 
 
 def show_todos():
+    """Show all todos in the todos.txt file."""
     with open("todos.txt", "r") as f:
         todos = f.readlines()
     if not todos:
@@ -15,6 +17,7 @@ def show_todos():
 
 
 def edit_todo():
+    """Edit a todo in the todos.txt file."""
     with open("todos.txt", "r") as f:
         todos = f.readlines()
     if not todos:
@@ -37,6 +40,7 @@ def edit_todo():
 
 
 def complete_todo():
+    """Complete a todo in the todos.txt file."""
     with open("todos.txt", "r") as f:
         todos = f.readlines()
     if not todos:
@@ -58,6 +62,7 @@ def complete_todo():
 
 
 def delete_todo():
+    """Delete a todo in the todos.txt file."""
     with open("todos.txt", "r") as f:
         todos = f.readlines()
     if not todos:
